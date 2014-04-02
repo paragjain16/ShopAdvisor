@@ -1,30 +1,34 @@
-from scrapy.contrib.spiders import CrawlSpider, Rule
+
+from scrapy.contrib.spiders import CrawlSpider, Rule, SitemapSpider
+from scrapy.spider import BaseSpider
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.selector import HtmlXPathSelector
 from scrapy import log
 from walmartproducts.items import WalmartproductsItem
+from scrapy.http import Request
+import urlparse
 
-class walmartproducts(CrawlSpider):
+class walmartproducts(BaseSpider):
 
 	name='walmartproducts'
 	allowed_domains = ['walmart.com']
-	start_urls = ['http://www.walmart.com/browse/cookies/976759_976787_1001391/']
-	#rules = [Rule(SgmlLinkExtractor(allow=['']), 'parse_walmart')]
-	#print 'outside def'
+	start_urls = ['http://www.walmart.com/browse/0/0']
+	download_delay = 3
 	def parse(self, response):
-		print 'inside def'
-		productList = []
+     		items = []         
+
+		#yield Request(response.url, meta={'items':items},callback=self.parse_items)
+	     	#get next button link 
 		sel = HtmlXPathSelector(response)
-		#p = sel.select('//*[@id="shelfDiv"]//*[@id="border"]/div')
 		divs=sel.select('//*[@id="shelfDiv"]//*[@id="border"]/div')
 		for p in divs:
 			if (len(p.re('i_[\d]*')) == 1):
-				product = WalmartproductsItem()	
-				product['id']= p.select('@id').extract()[0].split('_')[1]
+				item = WalmartproductsItem()	
+				item['id']= p.select('@id').extract()[0].split('_')[1]
 				info = p.select('.//*[@class="prodInfo"]')
-				product['url'] = info.select('.//div[@class="prodInfoBox"]/a/@title').extract()[0]
-				#product['url'] = sel.select('//*[@id="shelfDiv"]//*[@id="border"]').extract()
-				#product['id'] = ''
-				productList.append(product)
-		return productList
+				item['url'] = info.select('.//div[@class="prodInfoBox"]/a/@title').extract()[0]
+				yield item
+	     	next_page = sel.select('//a[text()="Next" and contains(@href, "ic")]/@href') 
+	     	if len(next_page) == 1 : 
+	        	yield Request('http://www.walmart.com'+next_page.extract()[0], self.parse)
 

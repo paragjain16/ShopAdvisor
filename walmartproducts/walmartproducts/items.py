@@ -6,8 +6,14 @@
 from scrapy.item import Item, Field
 
 class WalmartproductsItem(Item):
-    # define the fields for your item here like:
-    # name = Field()
-    #  pass
-      url = Field()
-      id = Field()
+    	# define the fields for your item here like:
+    	# name = Field()
+    	#  pass
+	url = Field()
+      	src = Field()
+      	name = Field()
+      	id = Field()
+	price = Field()
+	image = Field()
+	rating = Field()
+	category = Field()
