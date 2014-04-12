@@ -29,6 +29,7 @@ class MySpider(SitemapSpider):
 	        for li in hxs.select('//*[@id="crumbs"]/li') :
 	                cat = cat+li.select('./a/text()').extract()[0]+': '
 	        item['category'] = cat
+		item['image'] = hxs.select('*//div[@class="columnOne"]/div[@class="BoxContent"]//a[@id="Zoomer"]/@href')[0].extract()
 	        #item['description'] = node.xpath('description').extract()
 		return item
 	except Exception:
