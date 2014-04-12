@@ -12,4 +12,7 @@ BOT_VERSION = '1.0'
 SPIDER_MODULES = ['walmartproducts.spiders']
 NEWSPIDER_MODULE = 'walmartproducts.spiders'
 USER_AGENT = '%s/%s' % (BOT_NAME, BOT_VERSION)
-
+ITEM_PIPELINES = {
+    'walmartproducts.pipelines.WalmartproductsPipeline': 300
+}
+AUTOTHROTTLE_ENABLED = true
