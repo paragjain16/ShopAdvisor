@@ -9,6 +9,15 @@ class WalmartproductsItem(Item):
     	# define the fields for your item here like:
     	# name = Field()
     	#  pass
+	#def __init__(self):
+	#	url = ''
+        #	src = ''
+	#       name = ''
+	#      id = ''
+        #	price = ''
+	#       image = ''
+        #	rating = '' 
+	#       category = ''
 	url = Field()
       	src = Field()
       	name = Field()
