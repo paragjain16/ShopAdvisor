@@ -63,6 +63,8 @@ class walmartproducts(BaseSpider):
 			item['image'] = hxs.select('*//div[@class="columnOne"]/div[@class="BoxContent"]//a[@id="Zoomer"]/@href')[0].extract()
         	        #item['description'] = node.xpath('description').extract()
                 	return item
-	        except Exception:
+	        except Exception as e:	
+                	log.msg(str(e), level=log.ERROR)
+			log.err()
         	        return item
 

@@ -1,0 +1,9 @@
+2014-04-19 01:39:21-0500 [scrapy] INFO: Scrapy 0.22.2 started (bot: walmartproducts)
+2014-04-19 01:39:21-0500 [scrapy] INFO: Optional features available: ssl, http11
+2014-04-19 01:39:21-0500 [scrapy] INFO: Overridden settings: {'NEWSPIDER_MODULE': 'walmartproducts.spiders', 'SPIDER_MODULES': ['walmartproducts.spiders'], 'CONCURRENT_REQUESTS': 100, 'USER_AGENT': 'walmartproducts/1.0', 'BOT_NAME': 'walmartproducts'}
+2014-04-19 01:39:21-0500 [scrapy] INFO: Enabled extensions: LogStats, TelnetConsole, CloseSpider, WebService, CoreStats, SpiderState
+2014-04-19 01:39:22-0500 [scrapy] INFO: Enabled downloader middlewares: HttpAuthMiddleware, DownloadTimeoutMiddleware, UserAgentMiddleware, RetryMiddleware, DefaultHeadersMiddleware, MetaRefreshMiddleware, HttpCompressionMiddleware, RedirectMiddleware, CookiesMiddleware, ChunkedTransferMiddleware, DownloaderStats
+2014-04-19 01:39:22-0500 [scrapy] INFO: Enabled spider middlewares: HttpErrorMiddleware, OffsiteMiddleware, RefererMiddleware, UrlLengthMiddleware, DepthMiddleware
+2014-04-19 01:39:22-0500 [scrapy] INFO: Enabled item pipelines: WalmartproductsPipeline
+2014-04-19 01:39:22-0500 [walmartproducts] INFO: Spider opened
+2014-04-19 01:39:22-0500 [walmartproducts] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
