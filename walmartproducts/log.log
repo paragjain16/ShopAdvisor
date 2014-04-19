@@ -1,9 +1,67 @@
-2014-04-19 01:39:21-0500 [scrapy] INFO: Scrapy 0.22.2 started (bot: walmartproducts)
-2014-04-19 01:39:21-0500 [scrapy] INFO: Optional features available: ssl, http11
-2014-04-19 01:39:21-0500 [scrapy] INFO: Overridden settings: {'NEWSPIDER_MODULE': 'walmartproducts.spiders', 'SPIDER_MODULES': ['walmartproducts.spiders'], 'CONCURRENT_REQUESTS': 100, 'USER_AGENT': 'walmartproducts/1.0', 'BOT_NAME': 'walmartproducts'}
-2014-04-19 01:39:21-0500 [scrapy] INFO: Enabled extensions: LogStats, TelnetConsole, CloseSpider, WebService, CoreStats, SpiderState
-2014-04-19 01:39:22-0500 [scrapy] INFO: Enabled downloader middlewares: HttpAuthMiddleware, DownloadTimeoutMiddleware, UserAgentMiddleware, RetryMiddleware, DefaultHeadersMiddleware, MetaRefreshMiddleware, HttpCompressionMiddleware, RedirectMiddleware, CookiesMiddleware, ChunkedTransferMiddleware, DownloaderStats
-2014-04-19 01:39:22-0500 [scrapy] INFO: Enabled spider middlewares: HttpErrorMiddleware, OffsiteMiddleware, RefererMiddleware, UrlLengthMiddleware, DepthMiddleware
-2014-04-19 01:39:22-0500 [scrapy] INFO: Enabled item pipelines: WalmartproductsPipeline
-2014-04-19 01:39:22-0500 [walmartproducts] INFO: Spider opened
-2014-04-19 01:39:22-0500 [walmartproducts] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2014-04-19 02:25:44-0500 [scrapy] INFO: Scrapy 0.22.2 started (bot: walmartproducts)
+2014-04-19 02:25:44-0500 [scrapy] INFO: Optional features available: ssl, http11
+2014-04-19 02:25:44-0500 [scrapy] INFO: Overridden settings: {'NEWSPIDER_MODULE': 'walmartproducts.spiders', 'SPIDER_MODULES': ['walmartproducts.spiders'], 'CONCURRENT_REQUESTS': 100, 'USER_AGENT': 'walmartproducts/1.0', 'BOT_NAME': 'walmartproducts'}
+2014-04-19 02:25:44-0500 [scrapy] INFO: Enabled extensions: AutoThrottle, LogStats, TelnetConsole, CloseSpider, WebService, CoreStats, SpiderState
+2014-04-19 02:25:44-0500 [scrapy] INFO: Enabled downloader middlewares: HttpAuthMiddleware, DownloadTimeoutMiddleware, UserAgentMiddleware, RetryMiddleware, DefaultHeadersMiddleware, MetaRefreshMiddleware, HttpCompressionMiddleware, RedirectMiddleware, CookiesMiddleware, ChunkedTransferMiddleware, DownloaderStats
+2014-04-19 02:25:44-0500 [scrapy] INFO: Enabled spider middlewares: HttpErrorMiddleware, OffsiteMiddleware, RefererMiddleware, UrlLengthMiddleware, DepthMiddleware
+2014-04-19 02:25:44-0500 [scrapy] INFO: Enabled item pipelines: WalmartproductsPipeline
+2014-04-19 02:25:44-0500 [walmartproducts] INFO: Spider opened
+2014-04-19 02:25:44-0500 [walmartproducts] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2014-04-19 02:25:46-0500 [scrapy] INFO: Crawled 0 list pages of 60 products each
+2014-04-19 02:26:12-0500 [scrapy] ERROR: list index out of range
+2014-04-19 02:26:12-0500 [scrapy] Unhandled Error
+	Traceback (most recent call last):
+	  File "/home/pjain11/shopify/lib/python2.7/site-packages/twisted/internet/base.py", line 824, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/home/pjain11/shopify/lib/python2.7/site-packages/twisted/internet/defer.py", line 382, in callback
+	    self._startRunCallbacks(result)
+	  File "/home/pjain11/shopify/lib/python2.7/site-packages/twisted/internet/defer.py", line 490, in _startRunCallbacks
+	    self._runCallbacks()
+	  File "/home/pjain11/shopify/lib/python2.7/site-packages/twisted/internet/defer.py", line 577, in _runCallbacks
+	    current.result = callback(current.result, *args, **kw)
+	--- <exception caught here> ---
+	  File "/home/pjain11/shopadvisor/walmartproducts/walmartproducts/spiders/spider.py", line 56, in parse_product
+	    item['name'] = hxs.select('*//h1[@class="productTitle"]/text()').extract()[0]
+	exceptions.IndexError: list index out of range
+	
+2014-04-19 02:26:44-0500 [walmartproducts] INFO: Crawled 60 pages (at 60 pages/min), scraped 58 items (at 58 items/min)
+2014-04-19 02:27:20-0500 [scrapy] ERROR: list index out of range
+2014-04-19 02:27:20-0500 [scrapy] Unhandled Error
+	Traceback (most recent call last):
+	  File "/home/pjain11/shopify/lib/python2.7/site-packages/twisted/internet/base.py", line 824, in runUntilCurrent
+	    call.func(*call.args, **call.kw)
+	  File "/home/pjain11/shopify/lib/python2.7/site-packages/twisted/internet/defer.py", line 382, in callback
+	    self._startRunCallbacks(result)
+	  File "/home/pjain11/shopify/lib/python2.7/site-packages/twisted/internet/defer.py", line 490, in _startRunCallbacks
+	    self._runCallbacks()
+	  File "/home/pjain11/shopify/lib/python2.7/site-packages/twisted/internet/defer.py", line 577, in _runCallbacks
+	    current.result = callback(current.result, *args, **kw)
+	--- <exception caught here> ---
+	  File "/home/pjain11/shopadvisor/walmartproducts/walmartproducts/spiders/spider.py", line 57, in parse_product
+	    item['price'] = float((hxs.select('*//div[@class="columnTwo"]//div[contains(@class, "PricingInfo")]//span[@class="bigPriceText1"]/text()')[0].extract()+hxs.select('*//div[@class="columnTwo"]//div[contains(@class, "PricingInfo")]//span[@class="smallPriceText1"]/text()')[0].extract())[1:])
+	exceptions.IndexError: list index out of range
+	
+2014-04-19 02:27:33-0500 [scrapy] INFO: Received SIGINT, shutting down gracefully. Send again to force 
+2014-04-19 02:27:33-0500 [walmartproducts] INFO: Closing spider (shutdown)
+2014-04-19 02:27:44-0500 [walmartproducts] INFO: Crawled 107 pages (at 47 pages/min), scraped 105 items (at 47 items/min)
+2014-04-19 02:27:57-0500 [walmartproducts] INFO: Dumping Scrapy stats:
+	{'downloader/request_bytes': 113056,
+	 'downloader/request_count': 123,
+	 'downloader/request_method_count/GET': 123,
+	 'downloader/response_bytes': 8420375,
+	 'downloader/response_count': 123,
+	 'downloader/response_status_count/200': 123,
+	 'finish_reason': 'shutdown',
+	 'finish_time': datetime.datetime(2014, 4, 19, 7, 27, 57, 616828),
+	 'item_scraped_count': 120,
+	 'log_count/DEBUG': 246,
+	 'log_count/ERROR': 4,
+	 'log_count/INFO': 11,
+	 'request_depth_max': 3,
+	 'response_received_count': 123,
+	 'scheduler/dequeued': 123,
+	 'scheduler/dequeued/memory': 123,
+	 'scheduler/enqueued': 184,
+	 'scheduler/enqueued/memory': 184,
+	 'start_time': datetime.datetime(2014, 4, 19, 7, 25, 44, 910908)}
+2014-04-19 02:27:57-0500 [walmartproducts] INFO: Spider closed (shutdown)

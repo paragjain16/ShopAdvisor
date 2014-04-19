@@ -39,5 +39,5 @@ class WalmartproductsPipeline(object):
                         conn.commit()
         #return item
         except Exception as e:
-                log.msg(str(e), level=log.ERROR)
+                log.msg(str(e)+itemid, level=log.ERROR)
                 log.err()

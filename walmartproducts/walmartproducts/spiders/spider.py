@@ -67,7 +67,7 @@ class walmartproducts(BaseSpider):
         	        #item['description'] = node.xpath('description').extract()
                 	return item
 	        except Exception as e:	
-                	log.msg(str(e), level=log.ERROR)
+                	log.msg(str(e)+' '+response.url, level=log.ERROR)
 			log.err()
         	        return item
 

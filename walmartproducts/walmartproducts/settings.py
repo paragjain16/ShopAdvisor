@@ -15,5 +15,5 @@ USER_AGENT = '%s/%s' % (BOT_NAME, BOT_VERSION)
 ITEM_PIPELINES = {
     'walmartproducts.pipelines.WalmartproductsPipeline': 300
 }
-#AUTOTHROTTLE_ENABLED = True
+AUTOTHROTTLE_ENABLED = True
 CONCURRENT_REQUESTS = 100 
