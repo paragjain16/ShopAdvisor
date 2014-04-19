@@ -12,9 +12,8 @@ class walmartproducts(BaseSpider):
 	name='walmartproducts'
 	allowed_domains = ['walmart.com']
 	start_urls = ['http://www.walmart.com/browse/0/0']
-	log.ScrapyFileLogObserver(open('/home/cs423/log.log','w'), level=log.INFO).start()
+	log.ScrapyFileLogObserver(open('log.log','a'), level=log.INFO).start()
 	#download_delay = 1
-	log.msg('this is log msg')
 	def parse(self, response):
      		#items = []         
 		#yield Request(response.url, meta={'items':items},callback=self.parse_items)
@@ -55,7 +54,7 @@ class walmartproducts(BaseSpider):
 	                item['price'] = float((hxs.select('*//div[@class="columnTwo"]//div[contains(@class, "PricingInfo")]//span[@class="bigPriceText1"]/text()')[0].extract()+hxs.select('*//div[@class="columnTwo"]//div[contains(@class, "PricingInfo")]//span[@class="smallPriceText1"]/text()')[0].extract())[1:])
         	        rating = hxs.select('*//div[@class="columnTwo"]//div[@class="CustomerRatings"]//img[contains(@src, "rating.png")]/@title')
 	                item['rating'] = 0
-        	        if rating is not None:
+        	        if len(rating) is not 0:
                 	        item['rating'] = float(rating[0].extract().split(" ")[0])
 	                cat = ''
         	        for li in hxs.select('//*[@id="crumbs"]/li') :
