@@ -24,11 +24,11 @@ class WalmartproductsPipeline(object):
     def process_item(self, item, spider):
         try:
 		conn = MySQLdb.connect('localhost', 'root', 'hello_iknowx', 'shopadvisor', charset='utf8', use_unicode=True)
-                cursor = conn.cursor()
                 itemid = int(item.get('id', -1))
+                cursor = conn.cursor()
                 #print itemid
                 #print 'above item id'
-                cursor.execute("""SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_ID = %s""", itemid)
+                cursor.execute("""SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_ID = %s""", [itemid])
 
                 res = cursor.fetchone()
                 if res is None:
