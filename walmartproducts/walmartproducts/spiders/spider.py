@@ -19,7 +19,7 @@ class walmartproducts(BaseSpider):
 		#yield Request(response.url, meta={'items':items},callback=self.parse_items)
 	     	#get next button link 
 		#print 'inside browser'
-		pages = int(reponse.url.split('_')[-1])
+		pages = int(response.url.split('_')[-1])
 		if pages%700 == 0:
 			log.msg('Crawled '+str(pages)+' list pages of 60 products each')
 		sel = HtmlXPathSelector(response)
