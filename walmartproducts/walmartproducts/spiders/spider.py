@@ -11,9 +11,12 @@ class walmartproducts(BaseSpider):
 
 	name='walmartproducts'
 	allowed_domains = ['walmart.com']
-	start_urls = ['http://www.walmart.com/browse/0/0?ic=60_0']
+	#start_urls = ['http://www.walmart.com/browse/0/0?ic=60_0']
 	log.ScrapyFileLogObserver(open('log.log','a'), level=log.INFO).start()
 	#download_delay = 1
+	def __init__(self, *args, **kwargs):
+                super(walmartproducts, self).__init__(*args, **kwargs)
+                self.start_urls = ['http://www.walmart.com/browse/0/0?ic=60_'+str(kwargs.get('startindex'))]
 	def parse(self, response):
      		#items = []         
 		#yield Request(response.url, meta={'items':items},callback=self.parse_items)
