@@ -28,7 +28,7 @@ class WalmartproductsPipeline(object):
                 itemid = int(item.get('id', -1))
                 #print itemid
                 #print 'above item id'
-                cursor.execute("SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_ID = %s", itemid)
+                cursor.execute("""SELECT PRODUCT_ID FROM PRODUCTS WHERE PRODUCT_ID = %s""", itemid)
 
                 res = cursor.fetchone()
                 if res is None:
@@ -41,4 +41,3 @@ class WalmartproductsPipeline(object):
         except Exception as e:
                 log.msg(str(e), level=log.ERROR)
                 log.err()
-
