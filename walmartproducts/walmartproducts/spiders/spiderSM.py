@@ -28,13 +28,18 @@ class MySpider(SitemapSpider):
                 	log.msg(str(e)+' '+response.url, level=log.ERROR)
 			log.err()
 		try:
-			item['price'] = float((hxs.select('*//div[@class="columnTwo"]//div[contains(@class, "PricingInfo")]//span[@class="bigPriceText1"]/text()')[0].extract()+hxs.select('*//div[@class="columnTwo"]//div[contains(@class, "PricingInfo")]//span[@class="smallPriceText1"]/text()')[0].extract())[1:])
-	        except Exception as e:
-			item['price'] = float(hxs.select('*//div[@class="columnTwo"]//span[@class="SubmapPrice"]/text()')[0].extract()[1:])	
+			item['image'] = hxs.select('*//div[@class="columnOne"]/div[@class="BoxContent"]//a[@id="Zoomer"]/@href')[0].extract()
+		except Exception as e:	
                 	log.msg(str(e)+' '+response.url, level=log.ERROR)
 			log.err()
 
-		item['image'] = hxs.select('*//div[@class="columnOne"]/div[@class="BoxContent"]//a[@id="Zoomer"]/@href')[0].extract()
+		try:
+			item['price'] = float(((hxs.select('*//div[@class="columnTwo"]//span[@class="bigPriceText1"]/text()')[0].extract()+hxs.select('*//div[@class="columnTwo"]//span[@class="smallPriceText1"]/text()')[0].extract())[1:]).replace(",",""))
+	        except Exception as e:
+			item['price'] = float((hxs.select('*//div[@class="columnTwo"]//span[@class="SubmapPrice"]/text()')[0].extract()[1:]).replace(",",""))	
+                	log.msg(str(e)+' '+response.url, level=log.ERROR)
+			log.err()
+
 	                #rating = hxs.select('*//div[@class="columnTwo"]//div[@class="CustomerRatings"]//img[contains(@src, "rating.png")]/@title')
         	        #if len(rating) is not 0:
                 	#        item['rating'] = float(rating[0].extract().split(" ")[0])
