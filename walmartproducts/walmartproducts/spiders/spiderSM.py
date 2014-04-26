@@ -5,6 +5,7 @@ from walmartproducts.items import WalmartproductsItem
 
 class MySpider(SitemapSpider):
     name = 'spiderSM' 
+    log.ScrapyFileLogObserver(open('SiteMaplog.log','a'), level=log.INFO).start()
 
     def __init__(self, *args, **kwargs):
     	super(MySpider, self).__init__(*args, **kwargs)
