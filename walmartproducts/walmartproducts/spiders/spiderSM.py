@@ -11,26 +11,36 @@ class MySpider(SitemapSpider):
     	self.sitemap_urls = [kwargs.get('smf')]
 
     def parse(self, response):
-        #print 'Inside parser'
-        #print response
-        hxs = HtmlXPathSelector(response)
-        item = WalmartproductsItem()
-	try:
-	        item['id'] = response.url.split('/')[-1]
+	hxs = HtmlXPathSelector(response)
+	item = WalmartproductsItem()
+        try:
+		item['id'] = response.url.split('/')[-1]
 	        item['url'] = response.url
-	        item['src'] = 'walmart'
+        	item['src'] = 'walmart'
 	        item['name'] = hxs.select('*//h1[@class="productTitle"]/text()').extract()[0]
-	        item['price'] = float((hxs.select('*//div[@class="columnTwo"]//div[contains(@class, "PricingInfo")]//span[@class="bigPriceText1"]/text()')[0].extract()+hxs.select('*//div[@class="columnTwo"]//div[contains(@class, "PricingInfo")]//span[@class="smallPriceText1"]/text()')[0].extract())[1:])
-		rating = hxs.select('*//div[@class="columnTwo"]//div[@class="CustomerRatings"]//img[contains(@src, "rating.png")]/@title')
-	        item['rating'] = ''
-		if rating is not None:
-			item['rating'] = float(rating[0].extract().split(" ")[0])
-	        cat = ''
-	        for li in hxs.select('//*[@id="crumbs"]/li') :
-	                cat = cat+li.select('./a/text()').extract()[0]+': '
-	        item['category'] = cat
+		item['rating'] = 0
+      	        cat = ''
+		try:
+        	 	for li in hxs.select('//*[@id="crumbs"]/li') :
+                	       	cat = cat+li.select('.//text()').extract()[0]+': '
+		        item['category'] = cat
+		except Exception as e:	
+                	log.msg(str(e)+' '+response.url, level=log.ERROR)
+			log.err()
+		try:
+			item['price'] = float((hxs.select('*//div[@class="columnTwo"]//div[contains(@class, "PricingInfo")]//span[@class="bigPriceText1"]/text()')[0].extract()+hxs.select('*//div[@class="columnTwo"]//div[contains(@class, "PricingInfo")]//span[@class="smallPriceText1"]/text()')[0].extract())[1:])
+	        except Exception as e:
+			item['price'] = float(hxs.select('*//div[@class="columnTwo"]//span[@class="SubmapPrice"]/text()')[0].extract()[1:])	
+                	log.msg(str(e)+' '+response.url, level=log.ERROR)
+			log.err()
+
 		item['image'] = hxs.select('*//div[@class="columnOne"]/div[@class="BoxContent"]//a[@id="Zoomer"]/@href')[0].extract()
-	        #item['description'] = node.xpath('description').extract()
-		return item
-	except Exception:
-		return item
+	                #rating = hxs.select('*//div[@class="columnTwo"]//div[@class="CustomerRatings"]//img[contains(@src, "rating.png")]/@title')
+        	        #if len(rating) is not 0:
+                	#        item['rating'] = float(rating[0].extract().split(" ")[0])
+        	        #item['description'] = node.xpath('description').extract()
+               	return item
+	except Exception as e:	
+               	log.msg(str(e)+' '+response.url, level=log.ERROR)
+		log.err()
+                return item
