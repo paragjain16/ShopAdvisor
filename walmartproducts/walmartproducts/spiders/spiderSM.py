@@ -6,14 +6,20 @@ from walmartproducts.items import WalmartproductsItem
 class MySpider(SitemapSpider):
     name = 'spiderSM' 
     log.ScrapyFileLogObserver(open('SiteMaplog.log','a'), level=log.INFO).start()
+    handle_httpstatus_list = [404, 500, 503, 504, 400, 408, 403]
 
     def __init__(self, *args, **kwargs):
     	super(MySpider, self).__init__(*args, **kwargs)
     	self.sitemap_urls = [kwargs.get('smf')]
 
     def parse(self, response):
-	hxs = HtmlXPathSelector(response)
 	item = WalmartproductsItem()
+	if response.status in self.handle_httpstatus_list:
+		item['id'] = response.url.split('/')[-1]
+	        item['name'] =  response.url.split('/')[-2].replace("-"," ")
+		return item
+
+	hxs = HtmlXPathSelector(response)
         try:
 		item['id'] = response.url.split('/')[-1]
 	        item['url'] = response.url
