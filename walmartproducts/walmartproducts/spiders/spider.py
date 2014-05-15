@@ -12,7 +12,7 @@ class walmartproducts(BaseSpider):
 	name='walmartproducts'
 	allowed_domains = ['walmart.com']
 	#start_urls = ['http://www.walmart.com/browse/0/0?ic=60_0']
-	log.ScrapyFileLogObserver(open('log.log','a'), level=log.INFO).start()
+	log.ScrapyFileLogObserver(open('SiteMaplog.log','a'), level=log.INFO).start()
 	#download_delay = 1
 	def __init__(self, *args, **kwargs):
                 super(walmartproducts, self).__init__(*args, **kwargs)

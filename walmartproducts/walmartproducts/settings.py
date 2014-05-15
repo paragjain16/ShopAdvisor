@@ -16,5 +16,5 @@ ITEM_PIPELINES = {
     'walmartproducts.pipelines.WalmartproductsPipeline': 300
 }
 #AUTOTHROTTLE_ENABLED = True
-CONCURRENT_REQUESTS = 250 
+CONCURRENT_REQUESTS = 400 
 CONCURRENT_ITEMS = 500
